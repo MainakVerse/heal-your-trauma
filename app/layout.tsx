@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'Heal Your Trauma',
   description: 'Created with v0',
   generator: 'Supernova Business',
+  icons: {
+    icon: '/favicon.ico', // Path to your favicon file in the public folder
+  },
 }
 
 export default function RootLayout({
@@ -17,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <style>{`
 html {
   font-family: ${GeistSans.style.fontFamily};
