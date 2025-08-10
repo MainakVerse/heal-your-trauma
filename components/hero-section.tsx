@@ -53,21 +53,7 @@ export function HeroSection() {
             </Link>
           </div>
           
-          {/* Trust indicators */}
-          <div className="flex flex-wrap justify-center items-center gap-8 pt-8 md:pt-12 text-blue-200/60 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span>Licensed Professional</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span>10+ Years Experience</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span>500+ Success Stories</span>
-            </div>
-          </div>
+
         </div>
       </div>
     </section>

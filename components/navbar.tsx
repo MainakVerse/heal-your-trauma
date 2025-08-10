@@ -18,7 +18,7 @@ export function Navbar() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-blue-500 text-white shadow-md">
+    <header className="sticky top-0 z-50 w-full bg-blue-800 text-white shadow-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link className="text-2xl font-bold tracking-tight" href="#home">
           Heal Your Trauma
@@ -40,7 +40,7 @@ export function Navbar() {
               <MenuIcon className="h-6 w-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[250px] bg-blue-500 text-white sm:w-[300px]">
+          <SheetContent side="right" className="w-[250px] bg-blue-800 text-white sm:w-[300px]">
             <div className="flex flex-col items-start gap-6 p-6">
               <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="self-end">
                 <XIcon className="h-6 w-6" />

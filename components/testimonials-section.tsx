@@ -1,5 +1,65 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Quote, Star } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+
+// Custom hook for counter animation
+function useCounterAnimation(targetValue: number, duration: number = 2000) {
+  const [count, setCount] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.5 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
+  useEffect(() => {
+    if (!isVisible) return
+
+    let startTime: number
+    let animationFrame: number
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+      const currentCount = Math.floor(easeOutQuart * targetValue)
+      
+      setCount(currentCount)
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate)
+      }
+    }
+
+    animationFrame = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame)
+      }
+    }
+  }, [isVisible, targetValue, duration])
+
+  return { count, ref }
+}
 
 export function TestimonialsSection() {
   const testimonials = [
@@ -40,6 +100,11 @@ export function TestimonialsSection() {
       </div>
     )
   }
+
+  // Counter animations for statistics
+  const { count: happyClients, ref: happyClientsRef } = useCounterAnimation(500, 2500)
+  const { count: averageRating, ref: averageRatingRef } = useCounterAnimation(4.9, 2000)
+  const { count: successRate, ref: successRateRef } = useCounterAnimation(98, 2000)
 
   return (
     <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32 text-white">
@@ -122,20 +187,20 @@ export function TestimonialsSection() {
         {/* Bottom Statistics */}
         <div className="mt-20 md:mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center">
-            <div className="space-y-4 p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-              <div className="text-5xl md:text-6xl font-bold text-white">500+</div>
+            <div ref={happyClientsRef} className="space-y-4 p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+              <div className="text-5xl md:text-6xl font-bold text-white">{happyClients}+</div>
               
               <div className="text-blue-900 text-lg font-medium">Happy Clients</div>
             </div>
-            <div className="space-y-4 p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-              <div className="text-5xl md:text-6xl font-bold text-white">4.9</div>
+            <div ref={averageRatingRef} className="space-y-4 p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+              <div className="text-5xl md:text-6xl font-bold text-white">{averageRating.toFixed(1)}</div>
               <div className="text-blue-900 flex items-center justify-center space-x-2 text-lg font-medium">
                 <Star className="h-6 w-6 fill-yellow-400 text-yellow-400" />
                 <span>Average Rating</span>
               </div>
             </div>
-            <div className="space-y-4 p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-              <div className="text-5xl md:text-6xl font-bold text-white">98%</div>
+            <div ref={successRateRef} className="space-y-4 p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+              <div className="text-5xl md:text-6xl font-bold text-white">{successRate}%</div>
               <div className="text-blue-900 text-lg font-medium">Success Rate</div>
             </div>
           </div>

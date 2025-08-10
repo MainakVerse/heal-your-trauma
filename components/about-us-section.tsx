@@ -1,15 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Award, Heart, Users, CheckCircle } from "lucide-react"
+import { Award, Heart } from "lucide-react"
 
 export function AboutUsSection() {
-  const achievements = [
-    { icon: Users, text: "500+ Lives Transformed" },
-    { icon: Award, text: "10+ Years Experience" },
-    { icon: Heart, text: "Holistic Approach" },
-    { icon: CheckCircle, text: "Evidence-Based Methods" }
-  ]
+
 
   return (
     <section id="about" className="relative w-full py-16 md:py-24 lg:py-32 bg-gradient-to-br from-purple-50 via-violet-50 to-purple-100">
@@ -87,7 +82,7 @@ export function AboutUsSection() {
               {/* Main image container */}
               <div className="relative bg-white p-4 rounded-3xl shadow-2xl">
                 <Image
-                  src="/placeholder.svg?height=500&width=500"
+                  src="/jefferin.png"
                   width="500"
                   height="500"
                   alt="Portrait of Jefferin, a compassionate mental health coach"
@@ -114,35 +109,9 @@ export function AboutUsSection() {
           </div>
         </div>
 
-        {/* Achievement Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-          {achievements.map((achievement, index) => (
-            <div key={index} className="text-center group">
-              <div className="mx-auto w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <achievement.icon className="h-8 w-8 md:h-10 md:w-10 text-white" />
-              </div>
-              <p className="font-semibold text-gray-900 text-sm md:text-base">{achievement.text}</p>
-            </div>
-          ))}
-        </div>
 
-        {/* Additional Info Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mt-16">
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300">
-            <h4 className="font-bold text-purple-900 text-lg mb-2">Personalized Approach</h4>
-            <p className="text-gray-700 text-sm">Every session is tailored to your unique needs and healing journey.</p>
-          </div>
-          
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300">
-            <h4 className="font-bold text-purple-900 text-lg mb-2">Safe Environment</h4>
-            <p className="text-gray-700 text-sm">A judgment-free space where you can explore and express freely.</p>
-          </div>
-          
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300">
-            <h4 className="font-bold text-purple-900 text-lg mb-2">Proven Results</h4>
-            <p className="text-gray-700 text-sm">Evidence-based techniques that have transformed hundreds of lives.</p>
-          </div>
-        </div>
+
+
       </div>
     </section>
   )
