@@ -35,7 +35,7 @@ export function AboutUsSection() {
             <div className="space-y-6">
               <div className="space-y-4">
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-                  Meet Our Spiritual Guide ~ Jefferin Sequeira
+                  Meet Jefferin Sequeira
                 </h3>
                 <p className="text-gray-700 text-base md:text-lg leading-relaxed">
                   Jefferin is a compassionate and experienced mental health coach dedicated to guiding individuals through their healing journey. With a holistic approach, Jefferin combines evidence-based techniques with empathetic support to help clients overcome trauma, build resilience, and cultivate a life of purpose and joy.

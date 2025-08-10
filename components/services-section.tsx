@@ -1,29 +1,52 @@
+"use client"
+
+import Link from "next/link"
 import { Card, CardHeader, CardDescription, CardContent } from "@/components/ui/card"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Brain, Users, BookOpen, Lightbulb } from "lucide-react"
+import { useState } from "react"
 
 export function ServicesSection() {
+  const [openModal, setOpenModal] = useState<string | null>(null)
+
   const services = [
     {
+      id: "inner-healing",
       icon: Brain,
-      title: "Individual Coaching",
-      description: "Personalized one-on-one sessions to address your unique challenges and foster growth.",
+      title: "Inner Healing",
+      description: "Deep therapeutic work to heal inner wounds, release emotional blockages, and restore your authentic self.",
+      detailedDescription: "Addressing and healing emotional wounds and negative beliefs that may be affecting your mental and emotional well-being. Healing your wounded inner child involves addressing and resolving emotional wounding from the past that is currently affecting you. Therapy involves identifying & working through your “triggers”, negative core beliefs and behaviours patterns that stem from these wounds. The goal of healing your inner child is to re-birth anew with a new found connection to yourself & emotional homeostasis generating a sense of self-acceptance, inner harmony & peace.",
     },
     {
+      id: "life-coaching",
       icon: Users,
-      title: "Group Therapy",
-      description: "Connect with others in a supportive environment to share experiences and heal together.",
+      title: "Life Coaching",
+      description: "Transformative guidance to help you overcome obstacles, set meaningful goals, and create the life you desire.",
+      detailedDescription: "To Coach, is to bring a person from where they are to where they want to be. Life Coaching is a partnership to create a shared understanding of what you like to achieve. I will help to harness your skills, tap into your inner guidance & give you clarity and confidence to move forward.",
     },
     {
+      id: "past-life-regression",
       icon: BookOpen,
-      title: "Workshops & Seminars",
-      description: "Engaging educational sessions on various mental health topics and coping strategies.",
+      title: "Past Life Regression Therapy",
+      description: "Explore past life experiences to understand current patterns, heal karmic wounds, and gain spiritual insights.",
+      detailedDescription: "Regression Therapy is about accessing memories from the past as part of a psychotherapeutic process. Regression utilizes clinical hypnosis to take you to a deeply relaxed state and guide you through the recall experience. You will clear the emotional residue you unknowingly are carrying and begin to live a fully integrated life. Releasing old emotional blocks generates a flow of mental & emotional clarity & opens doors to achieve wisdom and happiness in this lifetime.",
     },
     {
+      id: "emotional-healing",
       icon: Lightbulb,
-      title: "Mindfulness Practices",
-      description: "Learn techniques to cultivate presence, reduce stress, and enhance emotional well-being.",
+      title: "Emotional Healing",
+      description: "Release emotional pain, develop healthy coping mechanisms, and cultivate inner peace and emotional balance.",
+      detailedDescription: "Emotional eating means eating for reasons other than hunger. You may eat because you are sad, depressed, stressed or lonely or are triggered by a past traumatic incident and eating distracts & numbs your pain. Having extra fat on the body can help protect against feeling the intensity of unprocessed emotions & acts like a thick coat of insulation on a high voltage wire. Extra weight protects you from the world. Our weight loss through Emotional Healing takes place with the help of subconscious awareness & hypnosis. You are guided through a series of sessions where you begin your exploration in understanding & accepting your unique emotional triggers getting in the way of maintaining a healthy body outlook & weight. Awareness + Acceptance + Action = Change",
     },
   ]
+
+  const handleLearnMore = (serviceId: string) => {
+    setOpenModal(serviceId)
+  }
+
+  const handleCloseModal = () => {
+    setOpenModal(null)
+  }
 
   return (
     <section id="services" className="relative w-full py-16 md:py-24 lg:py-32 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100">
@@ -81,12 +104,15 @@ export function ServicesSection() {
                   
                   {/* Learn More Link */}
                   <div className="mt-6">
-                    <span className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors cursor-pointer">
+                    <button 
+                      onClick={() => handleLearnMore(service.id)}
+                      className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors cursor-pointer"
+                    >
                       Learn more
                       <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
-                    </span>
+                    </button>
                   </div>
                 </CardContent>
               </div>
@@ -108,12 +134,45 @@ export function ServicesSection() {
                 Book a consultation to find the right service for you.
               </p>
             </div>
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap">
+            <Link href="#contact" className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap inline-block">
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
       </div>
+
+      {/* Service Detail Modals */}
+      {services.map((service) => (
+        <Dialog key={service.id} open={openModal === service.id} onOpenChange={() => setOpenModal(null)}>
+          <DialogContent className="max-w-2xl mx-4 md:mx-auto">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-3 text-2xl md:text-3xl font-bold text-gray-900">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 p-3 flex items-center justify-center">
+                  <service.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                </div>
+                {service.title}
+              </DialogTitle>
+            </DialogHeader>
+            
+            <div className="mt-6 space-y-6">
+              <div className="prose prose-gray max-w-none">
+                <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+                  {service.detailedDescription}
+                </p>
+              </div>
+              
+              <div className="flex justify-center pt-4">
+                <button
+                  onClick={handleCloseModal}
+                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base md:text-lg"
+                >
+                  Got It!
+                </button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      ))}
     </section>
   )
 }
