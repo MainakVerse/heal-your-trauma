@@ -115,7 +115,7 @@ export function ContactUsSection() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-lg font-semibold text-gray-900">Email</h3>
-                      <p className="text-blue-600 font-medium break-all">jefferin@healyourtrauma.in</p>
+                      <p className="text-blue-600 font-medium break-all">sequeirajefferin@gmail.com</p>
                       <p className="text-sm text-gray-600 mt-1">We respond within 24 hours</p>
                     </div>
                   </div>
